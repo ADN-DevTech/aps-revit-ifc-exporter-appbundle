@@ -2,7 +2,7 @@
 <ApplicationPackage Name="RevitDesignAutomation" Description="Revit IFC Exporter" Author="aps.help@autodesk.com">
   <CompanyDetails Name="Autodesk, Inc" Url="https://aps.autodesk.com" Email="aps.help@autodesk.com"/>
   <Components Description="Export Revit RVT to IFC">
-    <RuntimeRequirements SeriesMin="R2022" SeriesMax="R2022" Platform="Revit" OS="Win64"/>
+    <RuntimeRequirements SeriesMin="R2026" SeriesMax="R2026" Platform="Revit" OS="Win64"/>
     <ComponentEntry LoadOnRevitStartup="True" LoadOnCommandInvocation="False" AppDescription="Export Revit RVT to IFC" ModuleName="./Contents/RevitIfcExporter.addin" Version="1.0.0" AppName="RevitIfcExporter"/>
   </Components>
 </ApplicationPackage>

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "RevitIfcExporter2026": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2026\\Revit.exe",
+      "workingDirectory": "C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\t30091"
+    }
+  }
+}

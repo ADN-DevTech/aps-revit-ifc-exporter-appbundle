@@ -723,6 +723,34 @@ namespace BIM.IFC.Export
             }
         }
 
+#if SinceRVT2026
+        private bool UpdateParameterTemplate(IFCParameterTemplate parameterTemplate, string propertyName, object propertyVal)
+        {
+            switch (propertyName)
+            {
+                case "ExportBaseQuantities":
+                    parameterTemplate.ExportIFCBaseQuantities = ExportBaseQuantities;
+                    break;
+                case "ExportIFCCommonPropertySets":
+                    parameterTemplate.ExportIFCCommonPropertySets = (bool)propertyVal;
+                    break;
+                case "ExportInternalRevitPropertySets":
+                    parameterTemplate.ExportRevitElementParameters = (bool)propertyVal;
+                    break;
+                case "ExportMaterialPsets":
+                    parameterTemplate.ExportRevitMaterialParameters = (bool)propertyVal;
+                    break;
+                case "ExportSchedulesAsPsets":
+                    parameterTemplate.ExportRevitSchedules = (bool)propertyVal;
+                    break;
+                default:
+                    return false;
+            }
+
+            return true;
+        }
+#endif
+
         /// <summary>
         /// Updates the IFCExportOptions with the settings in this configuration.
         /// </summary>
@@ -730,6 +758,10 @@ namespace BIM.IFC.Export
         /// <param name="filterViewId">The id of the view that will be used to select which elements to export.</param>
         public void UpdateOptions(Document document, IFCExportOptions options, ElementId filterViewId)
         {
+#if SinceRVT2026
+            // This is a temporary home.
+            IFCParameterTemplate parameterTemplate = IFCParameterTemplate.GetOrCreateInSessionTemplate(document);
+#endif
             options.FilterViewId = VisibleElementsOfCurrentView ? filterViewId : ElementId.InvalidElementId;
 
             foreach (var prop in GetType().GetProperties())
@@ -770,7 +802,15 @@ namespace BIM.IFC.Export
                     default:
                         var propVal = prop.GetValue(this, null);
                         if (propVal != null)
+                        {
                             options.AddOption(prop.Name, propVal.ToString());
+#if SinceRVT2026
+                            if (!UpdateParameterTemplate(parameterTemplate, prop.Name, propVal))
+                            {
+                                options.AddOption(prop.Name, propVal.ToString());
+                            }
+#endif
+                        }
                         break;
                 }
             }

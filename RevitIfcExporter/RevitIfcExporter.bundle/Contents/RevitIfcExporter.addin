@@ -7,7 +7,7 @@
     <Description>Export Revit to IFC</Description>
     <VisibilityMode>AlwaysVisible</VisibilityMode>
     <Assembly>.\RevitIfcExporter.dll</Assembly>
-    <AddInId>DF38054E-9655-4519-92D3-F5797A4B3683</AddInId>
+    <AddInId>04AD2223-98EE-45E4-AFB7-42627670D305</AddInId>
     <VendorId>ADSK</VendorId>
     <VendorDescription>Autodesk, Inc, www.autodesk.com</VendorDescription>
   </AddIn>

@@ -3,8 +3,8 @@
     "RevitIfcExporter2025": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\Autodesk\\Revit 2025\\Revit.exe",
-      "commandLineArgs": "\"C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\ifcexport2025-JP\\Rvt Test Project 2025.rvt\"",
-      "workingDirectory": "C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\ifcexport2025-JP"
+      "commandLineArgs": "\"C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\ifcexport2025\\rac_basic_sample_project-propSet_2025.rvt\"",
+      "workingDirectory": "C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\ifcexport2025"
     }
   }
 }
