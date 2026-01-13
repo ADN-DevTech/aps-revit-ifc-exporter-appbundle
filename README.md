@@ -65,7 +65,7 @@ You can the original source code for these two classes under the path [Source
 
 1. **APS Account**: Learn how to create a APS Account, activate subscription and create an app at [this tutorial](https://aps.autodesk.com/tutorials).
 2. **Visual Studio 2022 and later** (Windows).
-3. **Revit 2021 and later**: required to compile changes into the plugin.
+3. **Revit 2023 and later**: required to compile changes into the plugin.
 
 ## Design Automation Setup
 
@@ -74,7 +74,7 @@ You can the original source code for these two classes under the path [Source
 ```json
 {
     "id": "RevitIfcExporter",
-    "engine": "Autodesk.Revit+2022",
+    "engine": "Autodesk.Revit+2023",
     "description": "Revit IFC exporter with Revit IFC export options support"
 }
 ```
@@ -111,6 +111,7 @@ You can the original source code for these two classes under the path [Source
         },
         "inputJson": {
             "verb": "get",
+            "required": true,
             "description": "Input Json parameters",
             "localName": "params.json"
         },
@@ -121,7 +122,7 @@ You can the original source code for these two classes under the path [Source
             "localName": "ifc"
         }
     },
-    "engine": "Autodesk.Revit+2022",
+    "engine": "Autodesk.Revit+2023",
     "appbundles": [
         "Autodesk.RevitIfcExporter+dev"
     ],
@@ -435,7 +436,7 @@ No more pre-saved IFC export settings in RVT file. Now it supports importing the
 
 ## Todo
 
-- [x] Add compile options for supporting multiple Revit versions (e.g. From Revit 2021 to Revit 2024)
+- [x] Add compile options for supporting multiple Revit versions (e.g. From Revit 2023 to Revit 2026)
 - [x] Add pre-complied DLLs to repository releases.
 - [x] Support specifying IFC export settings on the fly without pre-saved ones in RVT file.
 - [ ] Support exporting IFC from Revit links
@@ -443,6 +444,7 @@ No more pre-saved IFC export settings in RVT file. Now it supports importing the
 - [x] Support IFCExchangeRequirements
 - [x] Support IncludeSteelElements
 - [x] Support exporting only elements visible in specified view
+- [x] Support IFCParameterTemplate API for Revit 2026 and later.
 
 ## License
 
