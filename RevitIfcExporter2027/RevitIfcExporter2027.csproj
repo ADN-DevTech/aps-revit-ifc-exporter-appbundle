@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RevitIfcExporter</RootNamespace>
+    <AssemblyName>RevitIfcExporter</AssemblyName>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies><!-- To do "copy local" for referenced local nuget packages into output folder -->
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>$(DefineConstants);SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026;SinceRVT2027</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>TRACE;SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026;SinceRVT2027</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\RevitIfcExporter\ExportIfcFailuresProcessor.cs" Link="ExportIfcFailuresProcessor.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\ConfigurationComparer.cs" Link="IFC\ConfigurationComparer.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCEnumExtensions.cs" Link="IFC\IFCEnumExtensions.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCExportConfigurationsMap.partial.cs" Link="IFC\IFCExportConfigurationsMap.partial.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCKnownMVDAndER.cs" Link="IFC\IFCKnownMVDAndER.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCVersionAttributes.cs" Link="IFC\IFCVersionAttributes.cs" />
+    <Compile Include="..\RevitIfcExporter\InputParams.cs" Link="InputParams.cs" />
+    <Compile Include="..\RevitIfcExporter\MainApp.cs" Link="MainApp.cs" />
+    <Compile Include="..\RevitIfcExporter\OpenDocumentFailuresProcessor.cs" Link="OpenDocumentFailuresProcessor.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCExchangeRequirements.cs" Link="IFC\IFCExchangeRequirements.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCExportConfiguration.cs" Link="IFC\IFCExportConfiguration.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCExportConfigurationsMap.cs" Link="IFC\IFCExportConfigurationsMap.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCPhaseAttributes.cs" Link="IFC\IFCPhaseAttributes.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCExportConfigurationsUtils.cs" Link="IFC\IFCExportConfigurationsUtils.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCLinkedFileExportAs.cs" Link="IFC\IFCLinkedFileExportAs.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\LinkedFileExportAs.cs" Link="IFC\LinkedFileExportAs.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\SiteTransformBasis.cs" Link="IFC\SiteTransformBasis.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFCFacilityTypes.cs" Link="IFC\IFCFacilityTypes.cs" />
+    <Compile Include="..\RevitIfcExporter\IFC\IFC4x3Enums.cs" Link="IFC\IFC4x3Enums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RevitIfcExporter.bundle\PackageContents.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autodesk.Forge.DesignAutomation.Revit" Version="2027.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\NewtonSoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Revit.IFC.Common">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\Revit.IFC.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Revit.IFC.Export">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\Revit.IFC.Export.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIIFC">
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\RevitAPIIFC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>RevitIfcExporter2027</AssemblyTitle>
+    <Product>RevitIfcExporter2027</Product>
+    <Copyright>Copyright ©  2024</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y /F &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\&quot;&#xD;&#xA;del /F &quot;$(TargetDir)RevitIfcExporter.zip&quot;&#xD;&#xA;&quot;C:\Program Files\7-Zip\7z.exe&quot; a -tzip &quot;$(TargetDir)RevitIfcExporter.zip&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\&quot; -xr0!*.pdb&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot; copy &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\*.addin&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot; copy &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot;" />
+  </Target>
+</Project>
