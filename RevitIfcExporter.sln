@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitIfcExporter2024", "Rev
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitIfcExporter2025", "RevitIfcExporter2025\RevitIfcExporter2025.csproj", "{07FDDC8F-2F29-4BAC-8065-0CC7D0156550}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitIfcExporter2026", "RevitIfcExporter2026\RevitIfcExporter2026.csproj", "{528244E6-C58E-4901-88DD-3ABAC4045C53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitIfcExporter2027", "RevitIfcExporter2027\RevitIfcExporter2027.csproj", "{C653402C-6EEC-4885-877C-9D5F4D8536DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{07FDDC8F-2F29-4BAC-8065-0CC7D0156550}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07FDDC8F-2F29-4BAC-8065-0CC7D0156550}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07FDDC8F-2F29-4BAC-8065-0CC7D0156550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528244E6-C58E-4901-88DD-3ABAC4045C53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528244E6-C58E-4901-88DD-3ABAC4045C53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528244E6-C58E-4901-88DD-3ABAC4045C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528244E6-C58E-4901-88DD-3ABAC4045C53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C653402C-6EEC-4885-877C-9D5F4D8536DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C653402C-6EEC-4885-877C-9D5F4D8536DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C653402C-6EEC-4885-877C-9D5F4D8536DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C653402C-6EEC-4885-877C-9D5F4D8536DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
