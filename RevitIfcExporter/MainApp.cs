@@ -34,6 +34,9 @@ using Autodesk.Revit.DB.IFC;
 using System.Reflection;
 using Autodesk.Revit.Creation;
 using Revit.IFC.Common.Extensions;
+#if SinceRVT2027
+using Revit.IFC.Common.Utility;
+#endif
 
 namespace RevitIfcExporter
 {

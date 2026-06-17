@@ -6,10 +6,10 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies><!-- To do "copy local" for referenced local nuget packages into output folder -->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>$(DefineConstants);SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026</DefineConstants>
+    <DefineConstants>$(DefineConstants);SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026;SinceRVT2027</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DefineConstants>TRACE;SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026</DefineConstants>
+    <DefineConstants>TRACE;SinceRVT2023;SinceRVT2024;SinceRVT2025;SinceRVT2026;SinceRVT2027</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\RevitIfcExporter\ExportIfcFailuresProcessor.cs" Link="ExportIfcFailuresProcessor.cs" />
@@ -36,42 +36,42 @@
     <Content Include="RevitIfcExporter.bundle\PackageContents.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autodesk.Forge.DesignAutomation.Revit" Version="2026.0.0" />
+    <PackageReference Include="Autodesk.Forge.DesignAutomation.Revit" Version="2027.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2026\NewtonSoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\NewtonSoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Revit.IFC.Common">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2026\Revit.IFC.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\Revit.IFC.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Revit.IFC.Export">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2026\Revit.IFC.Export.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\Revit.IFC.Export.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPI">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2026\RevitAPI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIIFC">
-      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2026\RevitAPIIFC.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Autodesk\Revit 2027\RevitAPIIFC.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AssemblyTitle>RevitIfcExporter2026</AssemblyTitle>
-    <Product>RevitIfcExporter2026</Product>
+    <AssemblyTitle>RevitIfcExporter2027</AssemblyTitle>
+    <Product>RevitIfcExporter2027</Product>
     <Copyright>Copyright ©  2024</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /Y /F &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\&quot;&#xD;&#xA;del /F &quot;$(TargetDir)RevitIfcExporter.zip&quot;&#xD;&#xA;&quot;C:\Program Files\7-Zip\7z.exe&quot; a -tzip &quot;$(TargetDir)RevitIfcExporter.zip&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\&quot; -xr0!*.pdb&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2026&quot; copy &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\*.addin&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2026&quot;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2026&quot; copy &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2026&quot;" />
+    <Exec Command="xcopy /Y /F &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\&quot;&#xD;&#xA;del /F &quot;$(TargetDir)RevitIfcExporter.zip&quot;&#xD;&#xA;&quot;C:\Program Files\7-Zip\7z.exe&quot; a -tzip &quot;$(TargetDir)RevitIfcExporter.zip&quot; &quot;$(ProjectDir)RevitIfcExporter.bundle\&quot; -xr0!*.pdb&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot; copy &quot;$(ProjectDir)RevitIfcExporter.bundle\Contents\*.addin&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot;&#xD;&#xA;if exist &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot; copy &quot;$(ProjectDir)$(OutputPath)*.dll&quot; &quot;$(AppData)\Autodesk\REVIT\Addins\2027&quot;" />
   </Target>
 </Project>
