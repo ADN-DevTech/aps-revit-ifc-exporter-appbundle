@@ -51,6 +51,12 @@ namespace BIM.IFC.Export
                 ifcVersion = IFCVersion.IFC4RV;
                 KnownExchangeRequirements.Add(ifcVersion, new List<KnownERNames>() { KnownERNames.Architecture, KnownERNames.BuildingService, KnownERNames.Structural });
                 KnownExchangeRequirementsLocalized.Add(ifcVersion, erNameListForUI);
+#if SinceRVT2027
+                // For IFC4x3RV
+                ifcVersion = IFCVersion.IFC4x3RV;
+                KnownExchangeRequirements.Add(ifcVersion, new List<KnownERNames>() { KnownERNames.Architecture, KnownERNames.BuildingService, KnownERNames.Structural });
+                KnownExchangeRequirementsLocalized.Add(ifcVersion, erNameListForUI);
+#endif
             }
         }
 

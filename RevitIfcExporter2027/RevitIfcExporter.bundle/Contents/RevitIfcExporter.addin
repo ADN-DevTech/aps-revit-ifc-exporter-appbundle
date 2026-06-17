@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="DBApplication">
+    <Name>RevitIfcExporter</Name>
+    <FullClassName>RevitIfcExporter.MainApp</FullClassName>
+    <Text>RevitIfcExporter</Text>
+    <Description>Export Revit to IFC</Description>
+    <VisibilityMode>AlwaysVisible</VisibilityMode>
+    <Assembly>.\RevitIfcExporter.dll</Assembly>
+    <AddInId>97DC5687-89B1-46E6-9679-FAFAC2FEA2F9</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Autodesk, Inc, www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

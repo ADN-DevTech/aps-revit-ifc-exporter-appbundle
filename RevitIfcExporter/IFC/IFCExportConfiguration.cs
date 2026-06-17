@@ -104,6 +104,10 @@ namespace BIM.IFC.Export
         }
 
         public string CategoryMapping { get; set; } = null;
+
+#if SinceRVT2027
+        public string PropertyMapping { get; set; } = null;
+#endif
 #endif
 
         /// <summary>
@@ -751,15 +755,116 @@ namespace BIM.IFC.Export
         }
 #endif
 
+#if SinceRVT2027
+        private (bool useLegacyParameterMappingOptions, IFCParameterTemplate parameterTemplate) GetParameterMappingOptionsSource(Document document, bool isNewParameterMappingEnabled)
+        {
+            bool useLegacyParameterMappingOptions = !isNewParameterMappingEnabled || IsBuiltIn;
+
+            IFCParameterTemplate parameterTemplate = null;
+            if (!useLegacyParameterMappingOptions)
+            {
+                if (string.IsNullOrEmpty(PropertyMapping))
+                {
+                    parameterTemplate = IFCParameterTemplate.GetOrCreateInSessionTemplate(document);
+                }
+                else
+                {
+                    parameterTemplate = IFCParameterTemplate.FindByName(document, PropertyMapping);
+                }
+            }
+
+            return (useLegacyParameterMappingOptions, parameterTemplate);
+        }
+#endif
+
         /// <summary>
         /// Updates the IFCExportOptions with the settings in this configuration.
         /// </summary>
         /// <param name="options">The IFCExportOptions to update.</param>
         /// <param name="filterViewId">The id of the view that will be used to select which elements to export.</param>
+#if SinceRVT2027
+        public void UpdateOptions(Document document, IFCExportOptions options, ElementId filterViewId, bool isNewParameterMappingEnabled)
+        {
+            var (useLegacyParameterMappingOptions, parameterTemplate) = GetParameterMappingOptionsSource(document, isNewParameterMappingEnabled);
+
+            options.FilterViewId = VisibleElementsOfCurrentView ? filterViewId : ElementId.InvalidElementId;
+
+            foreach (var prop in GetType().GetProperties())
+            {
+                switch (prop.Name)
+                {
+                    case "Name":
+                        options.AddOption("ConfigName", Name);
+                        break;
+                    case "IFCVersion":
+                        options.FileVersion = IFCVersion;
+                        break;
+                    case "ActivePhaseId":
+                        if (options.FilterViewId == ElementId.InvalidElementId && IFCPhaseAttributes.Validate(ActivePhaseId, document))
+                            options.AddOption(prop.Name, ActivePhaseId.ToString());
+                        break;
+                    case "SpaceBoundaries":
+                        options.SpaceBoundaryLevel = SpaceBoundaries;
+                        break;
+                    case "SplitWallsAndColumns":
+                        options.WallAndColumnSplitting = SplitWallsAndColumns;
+                        break;
+                    case "ExportBaseQuantities":
+                        if (useLegacyParameterMappingOptions)
+                            options.ExportBaseQuantities = ExportBaseQuantities;
+                        break;
+                    case "ExportIFCCommonPropertySets":
+                        if (useLegacyParameterMappingOptions)
+                            options.AddOption(prop.Name, ExportIFCCommonPropertySets.ToString());
+                        break;
+                    case "ExportInternalRevitPropertySets":
+                        if (useLegacyParameterMappingOptions)
+                            options.AddOption(prop.Name, ExportInternalRevitPropertySets.ToString());
+                        break;
+                    case "ExportMaterialPsets":
+                        if (useLegacyParameterMappingOptions)
+                            options.AddOption(prop.Name, ExportMaterialPsets.ToString());
+                        break;
+                    case "ExportSchedulesAsPsets":
+                        if (useLegacyParameterMappingOptions)
+                            options.AddOption(prop.Name, ExportSchedulesAsPsets.ToString());
+                        break;
+                    case "ExportUserDefinedPsets":
+                        if (useLegacyParameterMappingOptions)
+                            options.AddOption(prop.Name, ExportUserDefinedPsets.ToString());
+                        break;
+                    case "ProjectAddress":
+                        string projectAddrJsonString = JsonConvert.SerializeObject(ProjectAddress);
+                        options.AddOption(prop.Name, projectAddrJsonString);
+                        break;
+                    case "ClassificationSettings":
+                        JsonSerializerSettings dateFormatSettings = new JsonSerializerSettings
+                        {
+                            DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                        };
+                        string classificationJsonStr = JsonConvert.SerializeObject(ClassificationSettings, dateFormatSettings);
+                        options.AddOption(prop.Name, classificationJsonStr);
+                        break;
+                    case "PropertyMapping":
+                        if (!useLegacyParameterMappingOptions && parameterTemplate != null)
+                        {
+                            options.AddOption(prop.Name, parameterTemplate.Name);
+                        }
+                        break;
+                    default:
+                        var propVal = prop.GetValue(this, null);
+                        if (propVal != null)
+                        {
+                            options.AddOption(prop.Name, propVal.ToString());
+                        }
+                        break;
+                }
+            }
+        }
+#else
         public void UpdateOptions(Document document, IFCExportOptions options, ElementId filterViewId)
         {
 #if SinceRVT2026
-            // This is a temporary home.
             IFCParameterTemplate parameterTemplate = IFCParameterTemplate.GetOrCreateInSessionTemplate(document);
 #endif
             options.FilterViewId = VisibleElementsOfCurrentView ? filterViewId : ElementId.InvalidElementId;
@@ -769,7 +874,7 @@ namespace BIM.IFC.Export
                 switch (prop.Name)
                 {
                     case "Name":
-                        options.AddOption("ConfigName", Name);      // Add config name into the option for use in the exporter
+                        options.AddOption("ConfigName", Name);
                         break;
                     case "IFCVersion":
                         options.FileVersion = IFCVersion;
@@ -803,18 +908,20 @@ namespace BIM.IFC.Export
                         var propVal = prop.GetValue(this, null);
                         if (propVal != null)
                         {
-                            options.AddOption(prop.Name, propVal.ToString());
 #if SinceRVT2026
                             if (!UpdateParameterTemplate(parameterTemplate, prop.Name, propVal))
                             {
                                 options.AddOption(prop.Name, propVal.ToString());
                             }
+#else
+                            options.AddOption(prop.Name, propVal.ToString());
 #endif
                         }
                         break;
                 }
             }
         }
+#endif
 
 
         /// <summary>

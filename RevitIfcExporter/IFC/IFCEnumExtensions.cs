@@ -54,9 +54,15 @@ namespace BIM.IFC.Export
                     return "IFC4 Reference Vie";
                 case IFCVersion.IFC2x3BFM:
                     return "IFC 2x3 Basic FM Handover View";
-#if SinceRVT2023
+#if SinceRVT2023 && !SinceRVT2027
                 case IFCVersion.IFC4x3:
                     return "IFC4x3";
+#endif
+#if SinceRVT2027
+                case IFCVersion.IFC4x3RV:
+                    return "IFC 4.3 Reference View";
+                case IFCVersion.IFC4x3DTV:
+                    return "IFC 4.3 Design Transfer View";
 #endif
 #if SinceRVT2024
                 case IFCVersion.IFCSG:

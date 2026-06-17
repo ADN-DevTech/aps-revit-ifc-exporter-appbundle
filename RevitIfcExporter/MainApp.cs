@@ -34,6 +34,9 @@ using Autodesk.Revit.DB.IFC;
 using System.Reflection;
 using Autodesk.Revit.Creation;
 using Revit.IFC.Common.Extensions;
+#if SinceRVT2027
+using Revit.IFC.Common.Utility;
+#endif
 
 namespace RevitIfcExporter
 {
@@ -178,7 +181,12 @@ namespace RevitIfcExporter
 
                 // Setup IFCExportOptions for caling Revit IFC export API.
                 var exportOptions = new IFCExportOptions();
+#if SinceRVT2027
+                exportConfig.UpdateOptions(doc, exportOptions, filterViewId,
+                    !OptionsUtil.UseLegacyParameterMapping());
+#else
                 exportConfig.UpdateOptions(doc, exportOptions, filterViewId);
+#endif
 
                 LogTrace("Creating export folder...");
 
