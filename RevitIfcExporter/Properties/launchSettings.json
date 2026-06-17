@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "RevitIfcExporter2026": {
+    "RevitIfcExporter": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2026\\Revit.exe",
-      "workingDirectory": "C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\t30091"
+      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2027\\Revit.exe",
+      "workingDirectory": "C:\\Users\\kangea\\Workspace\\Design Automation for Revit\\Sandbox\\ifcexport2027"
     }
   }
 }
