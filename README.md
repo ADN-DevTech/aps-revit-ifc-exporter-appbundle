@@ -5,7 +5,7 @@
 ![Revit](https://img.shields.io/badge/Plugins-Revit-lightgrey.svg)
 ![.NET](https://img.shields.io/badge/.NET%20Framework-4.8-blue.svg)
 ![.NET](https://img.shields.io/badge/.NET%20-8.0-blue.svg)
-[![Revit](https://img.shields.io/badge/Revit-2023|2024|2025|2026-lightgrey.svg)](https://www.autodesk.com/products/revit/overview/)
+[![Revit](https://img.shields.io/badge/Revit-2023|2024|2025|2026|2027-lightgrey.svg)](https://www.autodesk.com/products/revit/overview/)
 
 ![Advanced](https://img.shields.io/badge/Level-Advanced-red.svg)
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
@@ -31,7 +31,7 @@ If you need to use newer or latest Revit IFC exporter from <a href="https://gith
 
 1. **APS Account**: Learn how to create a APS Account, activate subscription and create an app at [this tutorial](https://aps.autodesk.com/tutorials).
 2. **Visual Studio 2022 and later** (Windows).
-3. **Revit 2023 and later**: required to compile changes into the plugin.
+3. **Revit 2023 to Revit 2027**: required to compile changes into the plugin.
 
 ## Design Automation Setup
 
@@ -44,6 +44,8 @@ If you need to use newer or latest Revit IFC exporter from <a href="https://gith
     "description": "Revit IFC exporter with Revit IFC export options support"
 }
 ```
+
+**Supported engine values:** `Autodesk.Revit+2023`, `Autodesk.Revit+2024`, `Autodesk.Revit+2025`, `Autodesk.Revit+2026`, `Autodesk.Revit+2027`.
 
 ### Activity example
 
@@ -402,7 +404,7 @@ No more pre-saved IFC export settings in RVT file. Now it supports importing the
 
 ## Todo
 
-- [x] Add compile options for supporting multiple Revit versions (e.g. From Revit 2023 to Revit 2026)
+- [x] Add compile options for supporting multiple Revit versions (e.g. From Revit 2023 to Revit 2027)
 - [x] Add pre-complied DLLs to repository releases.
 - [x] Support specifying IFC export settings on the fly without pre-saved ones in RVT file.
 - [ ] Support exporting IFC from Revit links

@@ -42,6 +42,26 @@ namespace BIM.IFC.Export
                 return;
 
             // For IFC4.3
+#if SinceRVT2027
+            IList<KnownFacilityTypes> ifcx3FacilityTypesList = new List<KnownFacilityTypes>()
+            {
+                KnownFacilityTypes.Bridge,
+                KnownFacilityTypes.Building,
+                KnownFacilityTypes.MarineFacility,
+                KnownFacilityTypes.Railway,
+                KnownFacilityTypes.Road
+            };
+
+            IList<string> facilityTypeNameListForUI = new List<string>(ifcx3FacilityTypesList.Select(x => x.ToFullLabel()));
+
+            // For IFC4x3RV
+            KnownFacilityTypesByVersion.Add(IFCVersion.IFC4x3RV, ifcx3FacilityTypesList);
+            KnownFacilityTypesLocalized.Add(IFCVersion.IFC4x3RV, facilityTypeNameListForUI);
+
+            // For IFC4x3DTV
+            KnownFacilityTypesByVersion.Add(IFCVersion.IFC4x3DTV, ifcx3FacilityTypesList);
+            KnownFacilityTypesLocalized.Add(IFCVersion.IFC4x3DTV, facilityTypeNameListForUI);
+#else
             const IFCVersion ifcVersion = IFCVersion.IFC4x3;
             KnownFacilityTypesByVersion.Add(ifcVersion,
                new List<KnownFacilityTypes>()
@@ -57,6 +77,7 @@ namespace BIM.IFC.Export
             IList<string> facilityTypeNameListForUI =
                new List<string>(KnownFacilityTypesByVersion[ifcVersion].Select(x => x.ToFullLabel()));
             KnownFacilityTypesLocalized.Add(ifcVersion, facilityTypeNameListForUI);
+#endif
 
             IList<string> bridgePredefinedTypesForUI = new List<string>();
             foreach (IFCBridgeType type in Enum.GetValues(typeof(IFCBridgeType)))

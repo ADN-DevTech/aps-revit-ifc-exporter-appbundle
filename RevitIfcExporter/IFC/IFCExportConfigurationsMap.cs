@@ -96,7 +96,17 @@ namespace BIM.IFC.Export
             AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4RV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true,
                exchangeRequirement: KnownERNames.BuildingService));
             AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4DTV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true));
+#if SinceRVT2027
+            AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4x3RV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true,
+               exchangeRequirement: KnownERNames.Architecture));
+            AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4x3RV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true,
+               exchangeRequirement: KnownERNames.Structural));
+            AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4x3RV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true,
+               exchangeRequirement: KnownERNames.BuildingService));
+            AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4x3DTV, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true));
+#else
             AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFC4x3, 0, true, false, false, false, false, false, false, false, false, false, linkedFileExportAs, includeSteelElements: true));
+#endif
             AddOrReplace(IFCExportConfiguration.CreateBuiltInConfiguration(IFCVersion.IFCSG, 1, true, true, false, false, false, true, false, false, true, false, linkedFileExportAs, includeSteelElements: true));
 #else
             // These are the built-in configurations.  Provide a more extensible means of storage.
@@ -175,6 +185,9 @@ namespace BIM.IFC.Export
                             configuration.ExportInternalRevitPropertySets = configEntity.Get<bool>(s_setupExportRevitProps);
 #if SinceRVT2025
                             configuration.CategoryMapping = configEntity.Get<string>(s_categoryMapping);
+#if SinceRVT2027
+                            configuration.PropertyMapping = configEntity.Get<string>(s_propertyMapping);
+#endif
 #endif
                             Field fieldIFCCommonPropertySets = m_OldSchema.GetField(s_setupExportIFCCommonProperty);
                             if (fieldIFCCommonPropertySets != null)
@@ -392,6 +405,10 @@ namespace BIM.IFC.Export
                                 configuration.ExportBarsInUniformSetsAsSeparateIFCEntities = bool.Parse(configMap[s_exportBarsInUniformRebarSetsAsSeparateIFCEntities]);
                             if (configMap.ContainsKey(s_categoryMapping))
                                 configuration.CategoryMapping = configMap[s_categoryMapping];
+#if SinceRVT2027
+                            if (configMap.ContainsKey(s_propertyMapping))
+                                configuration.PropertyMapping = configMap[s_propertyMapping];
+#endif
 #endif
                             if (configMap.ContainsKey(s_setupSitePlacement))
                             {
@@ -527,6 +544,9 @@ namespace BIM.IFC.Export
         private const string s_ownerHistoryLastModified = "OwnerHistoryLastModified";
         private const string s_exportBarsInUniformRebarSetsAsSeparateIFCEntities = "ExportBarsInUniformRebarSetsAsSeparateIFCEntities";
         private const string s_categoryMapping = "CategoryMapping";
+#if SinceRVT2027
+        private const string s_propertyMapping = "PropertyMapping";
+#endif
 #endif
 
 #if !SinceRVT2025
