@@ -237,6 +237,9 @@ namespace BIM.IFC.Export
                         mapData.Add(s_ownerHistoryLastModified, configuration.OwnerHistoryLastModified.ToString());
                         mapData.Add(s_exportBarsInUniformRebarSetsAsSeparateIFCEntities, configuration.ExportBarsInUniformSetsAsSeparateIFCEntities.ToString());
                         mapData.Add(s_categoryMapping, configuration.CategoryMapping.ToString());
+#if SinceRVT2027
+                        mapData.Add(s_propertyMapping, configuration.PropertyMapping?.ToString() ?? string.Empty);
+#endif
 #endif
 #if !SinceRVT2025
                         // For COBie v2.4
