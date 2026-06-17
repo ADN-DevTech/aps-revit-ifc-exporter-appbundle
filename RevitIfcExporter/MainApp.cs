@@ -178,7 +178,12 @@ namespace RevitIfcExporter
 
                 // Setup IFCExportOptions for caling Revit IFC export API.
                 var exportOptions = new IFCExportOptions();
+#if SinceRVT2027
+                exportConfig.UpdateOptions(doc, exportOptions, filterViewId,
+                    !OptionsUtil.UseLegacyParameterMapping());
+#else
                 exportConfig.UpdateOptions(doc, exportOptions, filterViewId);
+#endif
 
                 LogTrace("Creating export folder...");
 
